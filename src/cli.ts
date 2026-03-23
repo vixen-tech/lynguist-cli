@@ -1,10 +1,47 @@
 #!/usr/bin/env node
 import { loadConfig } from '@/config'
+import { download } from '@/downloader'
 import { merge } from '@/merger'
 import { getPreset } from '@/presets'
 import { scan } from '@/scanner'
 import { upload } from '@/uploader'
 import cac from 'cac'
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
+
+function loadEnvFile(filePath: string): void {
+    let content: string
+
+    try {
+        content = readFileSync(filePath, 'utf-8')
+    } catch {
+        return
+    }
+
+    for (const line of content.split('\n')) {
+        const trimmed = line.trim()
+
+        if (!trimmed || trimmed.startsWith('#')) continue
+
+        const eqIndex = trimmed.indexOf('=')
+
+        if (eqIndex === -1) continue
+
+        const key = trimmed.slice(0, eqIndex).trim()
+        let value = trimmed.slice(eqIndex + 1).trim()
+
+        if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+            value = value.slice(1, -1)
+        }
+
+        if (!process.env[key]) {
+            process.env[key] = value
+        }
+    }
+}
+
+loadEnvFile(resolve('.env.local'))
+loadEnvFile(resolve('.env'))
 
 const cli = cac('lynguist')
 
@@ -76,6 +113,19 @@ cli.command('upload', 'Upload translation files to Lynguist.com')
         const result = await upload(config, preset)
 
         console.log(`Uploaded ${result.keysPerLocale} keys for ${result.localesUploaded.length} locale(s): ${result.localesUploaded.join(', ')}`)
+    })
+
+cli.command('download', 'Download translations from Lynguist.com')
+    .action(async () => {
+        const config = await loadConfig()
+        const preset = getPreset(config.preset)
+
+        console.log('Downloading translations...')
+
+        const result = await download(config, preset)
+
+        console.log(`Downloaded ${result.keysPerLocale} keys for ${result.localesDownloaded.length} locale(s): ${result.localesDownloaded.join(', ')}`)
+        console.log(`Wrote ${result.filesWritten.length} file(s)`)
     })
 
 cli.command('sync', 'Scan, merge, and upload translations')

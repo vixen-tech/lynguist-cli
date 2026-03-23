@@ -1,3 +1,5 @@
+export { download } from '@/downloader'
+export type { DownloadResult } from '@/downloader/types'
 export { merge } from '@/merger'
 export type { MergeOptions, MergeResult } from '@/merger/types'
 export {
