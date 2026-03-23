@@ -3,6 +3,7 @@ import { loadConfig } from '@/config'
 import { merge } from '@/merger'
 import { getPreset } from '@/presets'
 import { scan } from '@/scanner'
+import { upload } from '@/uploader'
 import cac from 'cac'
 
 const cli = cac('lynguist')
@@ -63,6 +64,33 @@ cli.command('merge', 'Scan and write keys to translation files')
     .option('--prune', 'Remove keys not found in source')
     .action(async (options: { prune?: boolean }) => {
         await scanAndMerge({ write: true, prune: options.prune })
+    })
+
+cli.command('upload', 'Upload translation files to Lynguist.com')
+    .action(async () => {
+        const config = await loadConfig()
+        const preset = getPreset(config.preset)
+
+        console.log('Uploading translations...')
+
+        const result = await upload(config, preset)
+
+        console.log(`Uploaded ${result.keysPerLocale} keys for ${result.localesUploaded.length} locale(s): ${result.localesUploaded.join(', ')}`)
+    })
+
+cli.command('sync', 'Scan, merge, and upload translations')
+    .option('--prune', 'Remove keys not found in source')
+    .action(async (options: { prune?: boolean }) => {
+        await scanAndMerge({ write: true, prune: options.prune })
+
+        const config = await loadConfig()
+        const preset = getPreset(config.preset)
+
+        console.log('\nUploading translations...')
+
+        const result = await upload(config, preset)
+
+        console.log(`Uploaded ${result.keysPerLocale} keys for ${result.localesUploaded.length} locale(s): ${result.localesUploaded.join(', ')}`)
     })
 
 cli.help()

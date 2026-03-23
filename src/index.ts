@@ -11,3 +11,5 @@ export {
 export type { NamespaceHook, Preset } from '@/presets/types'
 export { extractFromCode, scan } from '@/scanner'
 export type { ExtractionResult, ScanOptions, ScanResult } from '@/scanner/types'
+export { upload } from '@/uploader'
+export type { UploadResult } from '@/uploader/types'
