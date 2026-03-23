@@ -1,4 +1,38 @@
 {
-  "name": "@vixen-tech/lynguist-cli",
-  "packageManager": "yarn@4.13.0"
+    "name": "@vixen-tech/lynguist-cli",
+    "version": "0.1.0",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs"
+        }
+    },
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsup",
+        "format": "prettier --write .",
+        "test": "vitest run"
+    },
+    "dependencies": {
+        "@babel/parser": "^7.27.0",
+        "@babel/traverse": "^7.27.0",
+        "@babel/types": "^7.27.0",
+        "fast-glob": "^3.3.3"
+    },
+    "devDependencies": {
+        "@types/babel__traverse": "^7.20.6",
+        "@types/node": "^25.5.0",
+        "prettier": "^3.8.1",
+        "prettier-plugin-organize-imports": "^4.3.0",
+        "tsup": "^8.4.0",
+        "typescript": "^5.8.2",
+        "vitest": "^3.1.1"
+    },
+    "packageManager": "yarn@4.13.0"
 }

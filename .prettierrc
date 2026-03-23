@@ -1,0 +1,18 @@
+{
+    "semi": false,
+    "arrowParens": "avoid",
+    "singleQuote": true,
+    "singleAttributePerLine": false,
+    "htmlWhitespaceSensitivity": "css",
+    "printWidth": 120,
+    "plugins": ["prettier-plugin-organize-imports"],
+    "tabWidth": 4,
+    "overrides": [
+        {
+            "files": "**/*.yml",
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
+}
