@@ -694,12 +694,15 @@ __metadata:
     "@babel/types": "npm:^7.27.0"
     "@types/babel__traverse": "npm:^7.20.6"
     "@types/node": "npm:^25.5.0"
+    cac: "npm:^7.0.0"
     fast-glob: "npm:^3.3.3"
     prettier: "npm:^3.8.1"
     prettier-plugin-organize-imports: "npm:^4.3.0"
     tsup: "npm:^8.4.0"
     typescript: "npm:^5.8.2"
     vitest: "npm:^3.1.1"
+  bin:
+    lynguist: ./dist/cli.js
   languageName: unknown
   linkType: soft
 
@@ -780,6 +783,13 @@ __metadata:
   version: 6.7.14
   resolution: "cac@npm:6.7.14"
   checksum: 10c0/4ee06aaa7bab8981f0d54e5f5f9d4adcd64058e9697563ce336d8a3878ed018ee18ebe5359b2430eceae87e0758e62ea2019c3f52ae6e211b1bd2e133856cd10
+  languageName: node
+  linkType: hard
+
+"cac@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "cac@npm:7.0.0"
+  checksum: 10c0/e9da33cb9f0425546ae92a450d479276f9969a050fe64f5d6fedf058bdd87f22a370797fe1c158e07655fa9fc183749df7cb2037431e3772faa7bee9919fb763
   languageName: node
   linkType: hard
 

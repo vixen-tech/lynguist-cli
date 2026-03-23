@@ -11,6 +11,7 @@ export interface ScanOptions {
     sourceDir: string
     preset: string
     extensions?: string[]
+    excludedDirs?: string[]
     functions?: string[]
 }
 

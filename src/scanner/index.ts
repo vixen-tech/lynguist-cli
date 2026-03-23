@@ -9,10 +9,12 @@ export async function scan(options: ScanOptions): Promise<ScanResult> {
     const preset = getPreset(options.preset)
     const extensions = options.extensions ?? preset.extensions
 
+    const excludedDirs = options.excludedDirs ?? ['node_modules']
     const pattern = `**/*{${extensions.join(',')}}`
     const files = await fg(pattern, {
         cwd: options.sourceDir,
         absolute: true,
+        ignore: excludedDirs.map(dir => `**/${dir}/**`),
     })
 
     const allKeys = []
@@ -20,9 +22,13 @@ export async function scan(options: ScanOptions): Promise<ScanResult> {
     for (const file of files) {
         const code = await fs.readFile(file, 'utf-8')
         const relativePath = path.relative(options.sourceDir, file)
-        const keys = extractFromCode(code, relativePath, preset)
 
-        allKeys.push(...keys)
+        try {
+            const keys = extractFromCode(code, relativePath, preset)
+            allKeys.push(...keys)
+        } catch (err) {
+            console.warn(`[lynguist] Failed to parse ${relativePath}, skipping`)
+        }
     }
 
     return {
