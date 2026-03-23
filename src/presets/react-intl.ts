@@ -89,5 +89,6 @@ function extract(code: string, filename: string): ExtractionResult[] {
 export const reactIntlPreset: Preset = {
     name: 'react-intl',
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    fileStrategy: 'single-file',
     extract,
 }

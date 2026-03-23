@@ -37,6 +37,7 @@ function extractScript(code: string, filename: string): string {
 export const vueI18nPreset: Preset = {
     name: 'vue-i18n',
     extensions: ['.vue', '.ts', '.js'],
+    fileStrategy: 'single-file',
     namespaceHooks: [{ functionName: 'useI18n', namespaceArgIndex: 0 }],
     globalFunctions: ['$t'],
     extractScript,

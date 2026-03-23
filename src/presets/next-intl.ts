@@ -3,6 +3,7 @@ import type { Preset } from './types.js'
 export const nextIntlPreset: Preset = {
     name: 'next-intl',
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    fileStrategy: 'single-file',
     namespaceHooks: [
         { functionName: 'useTranslations', namespaceArgIndex: 0 },
         { functionName: 'getTranslations', namespaceArgIndex: 0 },

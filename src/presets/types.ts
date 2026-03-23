@@ -9,6 +9,9 @@ export interface Preset {
     name: string
     extensions: string[]
 
+    /** How translation files are laid out on disk */
+    fileStrategy: 'single-file' | 'namespace-files'
+
     /** If provided, the preset handles its own extraction logic */
     extract?: (code: string, filename: string) => ExtractionResult[]
 

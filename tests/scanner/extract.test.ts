@@ -67,6 +67,20 @@ describe('extractFromCode — next-intl preset', () => {
         expect(footerKeys.map(r => r.key)).toEqual(expect.arrayContaining(['copyright', 'privacy_link']))
     })
 
+    it('extracts getTranslations with object argument { namespace }', async () => {
+        const code = await readFixture('ObjectNamespace.tsx')
+        const results = extractFromCode(code, 'ObjectNamespace.tsx', nextIntlPreset)
+
+        expect(results).toHaveLength(3)
+        expect(results).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({ key: 'title', namespace: 'home' }),
+                expect.objectContaining({ key: 'description', namespace: 'home' }),
+                expect.objectContaining({ key: 'seoTitle', namespace: 'metadata.home' }),
+            ]),
+        )
+    })
+
     it('handles useTranslations() with no namespace argument', async () => {
         const code = await readFixture('NoNamespace.tsx')
         const results = extractFromCode(code, 'NoNamespace.tsx', nextIntlPreset)

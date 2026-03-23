@@ -1,3 +1,5 @@
+export { merge } from '@/merger'
+export type { MergeOptions, MergeResult } from '@/merger/types'
 export {
     getPreset,
     nextIntlPreset,

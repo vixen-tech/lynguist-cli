@@ -63,7 +63,21 @@ export function extractFromCode(code: string, filename: string, preset: Preset):
             if (!hook) return
 
             const arg = callExpr.arguments[hook.namespaceArgIndex]
-            const namespace = arg && t.isStringLiteral(arg) ? arg.value : undefined
+            let namespace: string | undefined
+
+            if (arg && t.isStringLiteral(arg)) {
+                namespace = arg.value
+            } else if (arg && t.isObjectExpression(arg)) {
+                // Handle object argument: getTranslations({ namespace: 'Home' })
+                const nsProp = arg.properties.find(
+                    (p): p is t.ObjectProperty =>
+                        t.isObjectProperty(p) && t.isIdentifier(p.key) && p.key.name === 'namespace',
+                )
+
+                if (nsProp && t.isStringLiteral(nsProp.value)) {
+                    namespace = nsProp.value.value
+                }
+            }
 
             if (t.isIdentifier(id)) {
                 translatorBindings.set(id.name, namespace)

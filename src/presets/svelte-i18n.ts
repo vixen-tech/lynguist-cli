@@ -29,6 +29,7 @@ function extractScript(code: string, filename: string): string {
 export const svelteI18nPreset: Preset = {
     name: 'svelte-i18n',
     extensions: ['.svelte', '.ts', '.js'],
+    fileStrategy: 'single-file',
     globalFunctions: ['$_', '$t', '$format'],
     extractScript,
 }

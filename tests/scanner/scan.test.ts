@@ -11,11 +11,11 @@ describe('scan — next-intl integration', () => {
             preset: 'next-intl',
         })
 
-        expect(result.scannedFiles).toBe(6)
+        expect(result.scannedFiles).toBe(7)
 
         // BasicComponent: 2, ServerComponent: 2, NestedKeys: 3,
-        // MultipleNamespaces: 4, NoNamespace: 2, RichText: 4 = 17
-        expect(result.keys).toHaveLength(17)
+        // MultipleNamespaces: 4, NoNamespace: 2, RichText: 4, ObjectNamespace: 3 = 20
+        expect(result.keys).toHaveLength(20)
     })
 
     it('returns correct namespaces across files', async () => {
@@ -26,7 +26,17 @@ describe('scan — next-intl integration', () => {
 
         const namespaces = [...new Set(result.keys.map(k => k.namespace))]
         expect(namespaces).toEqual(
-            expect.arrayContaining(['Dashboard', 'Settings', 'Profile', 'Header', 'Footer', 'Marketing', undefined]),
+            expect.arrayContaining([
+                'Dashboard',
+                'Settings',
+                'Profile',
+                'Header',
+                'Footer',
+                'Marketing',
+                'home',
+                'metadata.home',
+                undefined,
+            ]),
         )
     })
 
