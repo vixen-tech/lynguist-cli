@@ -1,6 +1,23 @@
 {
     "name": "@vixen-tech/lynguist-cli",
     "version": "0.1.0",
+    "description": "CLI tool for extracting, managing, and syncing translation keys with Lynguist.com",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/vixen-tech/lynguist-cli.git"
+    },
+    "keywords": [
+        "i18n",
+        "internationalization",
+        "translations",
+        "lynguist",
+        "next-intl",
+        "react-i18next",
+        "react-intl",
+        "vue-i18n",
+        "svelte-i18n"
+    ],
     "type": "module",
     "bin": {
         "lynguist": "./dist/cli.js"
