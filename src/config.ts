@@ -17,7 +17,7 @@ export interface LynguistConfig {
     }
 }
 
-const CONFIG_FILES = ['lynguist.config.ts', 'lynguist.config.js', 'lynguist.config.json']
+const CONFIG_FILES = ['lynguist.config.js', 'lynguist.config.json']
 
 export async function loadConfig(cwd: string = process.cwd()): Promise<LynguistConfig> {
     for (const file of CONFIG_FILES) {
@@ -36,11 +36,9 @@ export async function loadConfig(cwd: string = process.cwd()): Promise<LynguistC
 
             return mod.default ?? mod
         } catch {
-            throw new Error(
-                `Failed to load ${file}. If using .ts, run with tsx:\n  npx tsx node_modules/.bin/lynguist scan\nOr use .js / .json instead.`,
-            )
+            throw new Error(`Failed to load ${file}.`)
         }
     }
 
-    throw new Error('No config file found. Create a lynguist.config.ts (or .js/.json) in your project root.')
+    throw new Error('No config file found. Create a lynguist.config.js (or .json) in your project root.')
 }
