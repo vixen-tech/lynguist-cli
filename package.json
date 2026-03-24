@@ -1,6 +1,5 @@
 {
     "name": "@vixen-tech/lynguist-cli",
-    "version": "0.1.0",
     "description": "CLI tool for extracting, managing, and syncing translation keys with Lynguist.com",
     "license": "MIT",
     "repository": {
