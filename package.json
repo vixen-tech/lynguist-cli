@@ -5,7 +5,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/vixen-tech/lynguist-cli.git"
+        "url": "git+https://github.com/vixen-tech/lynguist-cli.git"
     },
     "keywords": [
         "i18n",
@@ -20,7 +20,7 @@
     ],
     "type": "module",
     "bin": {
-        "lynguist": "./dist/cli.js"
+        "lynguist": "dist/cli.js"
     },
     "exports": {
         ".": {
