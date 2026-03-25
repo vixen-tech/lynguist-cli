@@ -43,8 +43,9 @@ async function readLocaleTranslations(
     locale: string,
     translationsDir: string,
     preset: Preset,
+    config: LynguistConfig,
 ): Promise<Record<string, string | null>> {
-    if (preset.fileStrategy === 'single-file') {
+    if ((config.fileStrategy ?? preset.fileStrategy) === 'single-file') {
         const filePath = path.resolve(translationsDir, `${locale}.json`)
         const data = await readJsonFile(filePath)
 
@@ -89,7 +90,7 @@ export async function upload(config: LynguistConfig, preset: Preset): Promise<Up
     let keysPerLocale = 0
 
     for (const locale of locales) {
-        const localeData = await readLocaleTranslations(locale, translationsDir, preset)
+        const localeData = await readLocaleTranslations(locale, translationsDir, preset, config)
 
         translations[locale] = localeData
         keysPerLocale = Object.keys(localeData).length

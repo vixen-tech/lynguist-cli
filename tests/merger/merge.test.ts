@@ -251,6 +251,23 @@ describe('merge – namespace-files strategy', () => {
         expect(result.pruned).toBe(1)
     })
 
+    it('respects config-level fileStrategy override to single-file', async () => {
+        const keys = [key('greeting'), key('farewell')]
+
+        const result = await merge(
+            keys,
+            makeConfig({ locales: ['en'], fileStrategy: 'single-file' }),
+            namespaceFilesPreset,
+        )
+
+        expect(result.added).toBe(2)
+        expect(result.filesWritten).toHaveLength(1)
+
+        const en = JSON.parse(await fs.readFile(path.join(tmpDir, 'en.json'), 'utf-8'))
+
+        expect(en).toEqual({ farewell: '', greeting: '' })
+    })
+
     it('keeps existing namespace files when not pruning', async () => {
         await fs.mkdir(path.join(tmpDir, 'en'), { recursive: true })
         await fs.writeFile(path.join(tmpDir, 'en', 'legacy.json'), JSON.stringify({ old_key: 'Old Value' }))

@@ -225,7 +225,7 @@ export async function merge(
     const grouped = groupKeysByNamespace(keys)
 
     for (const locale of locales) {
-        if (preset.fileStrategy === 'single-file') {
+        if ((config.fileStrategy ?? preset.fileStrategy) === 'single-file') {
             const filePath = path.resolve(translationsDir, `${locale}.json`)
             const existing = await readJsonFile(filePath)
             const merged = mergeSingleFile(existing, keys, prune)

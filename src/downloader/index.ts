@@ -117,7 +117,7 @@ export async function download(config: LynguistConfig, preset: Preset): Promise<
 
         keysPerLocale = Object.keys(flatTranslations).length
 
-        if (preset.fileStrategy === 'single-file') {
+        if ((config.fileStrategy ?? preset.fileStrategy) === 'single-file') {
             const nested = unflattenJson(flatTranslations)
             const filePath = path.resolve(translationsDir, `${locale}.json`)
 

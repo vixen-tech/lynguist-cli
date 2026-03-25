@@ -36,16 +36,17 @@ The API token can also be set via the `LYNGUIST_API_TOKEN` environment variable 
 
 ### Options
 
-| Option            | Description                                          | Default            |
-|-------------------|------------------------------------------------------|--------------------|
-| `sourceDir`       | Directory to scan for translation keys               | — (required)       |
-| `translationsDir` | Directory for translation JSON files                 | `lang`             |
-| `locales`         | Array of locale codes                                | — (required)       |
-| `preset`          | Framework preset to use                              | — (required)       |
-| `extensions`      | File extensions to scan (overrides preset)           | —                  |
-| `excludedDirs`    | Directories to skip during scan                      | `['node_modules']` |
-| `functions`       | Custom translation function names (overrides preset) | —                  |
-| `lynguist.apiKey` | API token for Lynguist.com                           | —                  |
+| Option            | Description                                                      | Default            |
+|-------------------|------------------------------------------------------------------|--------------------|
+| `sourceDir`       | Directory to scan for translation keys                           | — (required)       |
+| `translationsDir` | Directory for translation JSON files                             | `lang`             |
+| `locales`         | Array of locale codes                                            | — (required)       |
+| `preset`          | Framework preset to use                                          | — (required)       |
+| `extensions`      | File extensions to scan (overrides preset)                       | —                  |
+| `excludedDirs`    | Directories to skip during scan                                  | `['node_modules']` |
+| `functions`       | Custom translation function names (overrides preset)             | —                  |
+| `fileStrategy`    | Override preset file layout (`single-file` or `namespace-files`) | preset default     |
+| `lynguist.apiKey` | API token for Lynguist.com                                       | —                  |
 
 ## Presets
 
@@ -105,10 +106,10 @@ npx lynguist sync --prune
 
 ## Environment Variables
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `LYNGUIST_API_TOKEN` | API token (fallback if not in config) | — |
-| `LYNGUIST_TIMEOUT` | Request timeout in ms | `120000` |
+| Variable             | Description                           | Default  |
+|----------------------|---------------------------------------|----------|
+| `LYNGUIST_API_TOKEN` | API token (fallback if not in config) | —        |
+| `LYNGUIST_TIMEOUT`   | Request timeout in ms                 | `120000` |
 
 ## Programmatic Usage
 

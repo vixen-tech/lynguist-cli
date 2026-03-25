@@ -12,6 +12,7 @@ export interface LynguistConfig {
     extensions?: string[]
     excludedDirs?: string[]
     functions?: string[]
+    fileStrategy?: 'single-file' | 'namespace-files'
     lynguist?: {
         apiKey?: string
     }
