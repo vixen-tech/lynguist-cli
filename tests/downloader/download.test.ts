@@ -79,14 +79,14 @@ describe('unflattenJson', () => {
         })
     })
 
-    it('converts null values to empty strings', () => {
+    it('preserves null values', () => {
         const result = unflattenJson({
             'Home.title': null,
             'Nav.about': 'About',
         })
 
         expect(result).toEqual({
-            Home: { title: '' },
+            Home: { title: null },
             Nav: { about: 'About' },
         })
     })
@@ -185,7 +185,7 @@ describe('download – single-file strategy', () => {
         })
     })
 
-    it('converts null values to empty strings in written files', async () => {
+    it('preserves null values in written files', async () => {
         mockFetchResponse({
             en: { 'Home.title': 'Welcome', 'Home.subtitle': null },
         })
@@ -194,7 +194,7 @@ describe('download – single-file strategy', () => {
 
         const content = JSON.parse(await fs.readFile(path.join(tmpDir, 'en.json'), 'utf-8'))
 
-        expect(content.Home.subtitle).toBe('')
+        expect(content.Home.subtitle).toBeNull()
     })
 
     it('sorts keys alphabetically', async () => {

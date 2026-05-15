@@ -128,14 +128,14 @@ function mergeSingleFile(
         const segments = pathStr.split('.')
         const existingValue = getNested(existing, segments)
 
-        if (existingValue !== undefined && existingValue !== '' && typeof existingValue !== 'object') {
+        if (existingValue !== undefined && existingValue !== null && existingValue !== '' && typeof existingValue !== 'object') {
             setNested(data, segments, existingValue)
             preserved++
-        } else if (existingValue === '') {
-            setNested(data, segments, '')
+        } else if (existingValue === null || existingValue === '') {
+            setNested(data, segments, null)
             preserved++
         } else {
-            setNested(data, segments, '')
+            setNested(data, segments, null)
             added++
         }
     }
@@ -177,14 +177,14 @@ function mergeFlat(
     for (const key of keys) {
         const existingValue = existing[key]
 
-        if (existingValue !== undefined && existingValue !== '') {
+        if (existingValue !== undefined && existingValue !== null && existingValue !== '') {
             data[key] = existingValue
             preserved++
-        } else if (existingValue === '') {
-            data[key] = ''
+        } else if (existingValue === null || existingValue === '') {
+            data[key] = null
             preserved++
         } else {
-            data[key] = ''
+            data[key] = null
             added++
         }
     }

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.2 [2026-05-15]
+
+### Changed
+
+- Empty translation values now use `null` instead of `""` (empty string) when scanning, merging, and downloading translations.
+
 ## 1.0.1 [2026-03-25]
 
 ### Added

@@ -54,8 +54,8 @@ describe('merge – single-file strategy', () => {
         const en = JSON.parse(await fs.readFile(path.join(tmpDir, 'en.json'), 'utf-8'))
 
         expect(en).toEqual({
-            Home: { subtitle: '', title: '' },
-            Nav: { label: '' },
+            Home: { subtitle: null, title: null },
+            Nav: { label: null },
         })
     })
 
@@ -68,7 +68,7 @@ describe('merge – single-file strategy', () => {
 
         const en = JSON.parse(await fs.readFile(path.join(tmpDir, 'en.json'), 'utf-8'))
 
-        expect(en).toEqual({ farewell: '', greeting: '' })
+        expect(en).toEqual({ farewell: null, greeting: null })
     })
 
     it('preserves existing non-empty values', async () => {
@@ -84,7 +84,7 @@ describe('merge – single-file strategy', () => {
         const en = JSON.parse(await fs.readFile(path.join(tmpDir, 'en.json'), 'utf-8'))
 
         expect(en.Home.title).toBe('Welcome')
-        expect(en.Home.subtitle).toBe('')
+        expect(en.Home.subtitle).toBeNull()
     })
 
     it('keeps stale keys by default (no prune)', async () => {
@@ -136,8 +136,8 @@ describe('merge – single-file strategy', () => {
         const en = JSON.parse(await fs.readFile(path.join(tmpDir, 'en.json'), 'utf-8'))
 
         expect(en).toEqual({
-            Home: { title: '' },
-            global_key: '',
+            Home: { title: null },
+            global_key: null,
         })
     })
 
@@ -155,11 +155,11 @@ describe('merge – single-file strategy', () => {
         const en = JSON.parse(await fs.readFile(path.join(tmpDir, 'en.json'), 'utf-8'))
 
         expect(en).toEqual({
-            home: { title: '' },
+            home: { title: null },
             metadata: {
-                about: { title: '' },
-                home: { description: '', title: '' },
-                titleTemplate: '',
+                about: { title: null },
+                home: { description: null, title: null },
+                titleTemplate: null,
             },
         })
     })
@@ -182,7 +182,7 @@ describe('merge – single-file strategy', () => {
         const en = JSON.parse(await fs.readFile(path.join(tmpDir, 'en.json'), 'utf-8'))
 
         expect(en.metadata.home.title).toBe('Existing Title')
-        expect(en.metadata.home.seoKeywords).toBe('')
+        expect(en.metadata.home.seoKeywords).toBeNull()
         expect(en.metadata.titleTemplate).toBe('%s • Site')
         expect(result.added).toBe(1) // seoKeywords
         expect(result.preserved).toBe(3) // title, description (stale but kept), titleTemplate
@@ -204,11 +204,11 @@ describe('merge – namespace-files strategy', () => {
 
         const enHome = JSON.parse(await fs.readFile(path.join(tmpDir, 'en', 'home.json'), 'utf-8'))
 
-        expect(enHome).toEqual({ title: '' })
+        expect(enHome).toEqual({ title: null })
 
         const frNav = JSON.parse(await fs.readFile(path.join(tmpDir, 'fr', 'nav.json'), 'utf-8'))
 
-        expect(frNav).toEqual({ label: '' })
+        expect(frNav).toEqual({ label: null })
     })
 
     it('puts non-namespaced keys in default.json', async () => {
@@ -218,7 +218,7 @@ describe('merge – namespace-files strategy', () => {
 
         const defaultFile = JSON.parse(await fs.readFile(path.join(tmpDir, 'en', 'default.json'), 'utf-8'))
 
-        expect(defaultFile).toEqual({ greeting: '' })
+        expect(defaultFile).toEqual({ greeting: null })
     })
 
     it('preserves existing values in namespace files', async () => {
@@ -232,7 +232,7 @@ describe('merge – namespace-files strategy', () => {
         const enHome = JSON.parse(await fs.readFile(path.join(tmpDir, 'en', 'home.json'), 'utf-8'))
 
         expect(enHome.title).toBe('Welcome')
-        expect(enHome.subtitle).toBe('')
+        expect(enHome.subtitle).toBeNull()
         expect(result.added).toBe(1)
         expect(result.preserved).toBe(1)
     })
@@ -265,7 +265,7 @@ describe('merge – namespace-files strategy', () => {
 
         const en = JSON.parse(await fs.readFile(path.join(tmpDir, 'en.json'), 'utf-8'))
 
-        expect(en).toEqual({ farewell: '', greeting: '' })
+        expect(en).toEqual({ farewell: null, greeting: null })
     })
 
     it('keeps existing namespace files when not pruning', async () => {

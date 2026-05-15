@@ -27,7 +27,7 @@ export function unflattenJson(flat: Record<string, string | null>): JsonObject {
 
         const value = flat[key]
 
-        current[segments[segments.length - 1]] = value === null ? '' : value
+        current[segments[segments.length - 1]] = value === null ? null : value
     }
 
     return result
