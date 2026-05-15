@@ -5,7 +5,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import type { DownloadResult } from './types.js'
 
-type JsonValue = string | JsonObject
+type JsonValue = string | null | JsonObject
 type JsonObject = { [key: string]: JsonValue }
 
 export function unflattenJson(flat: Record<string, string | null>): JsonObject {
